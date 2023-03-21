@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       theme: ThemeData(
         useMaterial3: true,
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.lime),
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
       home: const MyHomePage(title: 'BMI Calculator'),
     );
@@ -43,15 +43,16 @@ class _MyHomePageState extends State<MyHomePage> {
     num theweight = int.tryParse(myweightController.text) ?? 0;
     num theheight = int.tryParse(myheightController.text) ?? 0;
     num heightInMeters = (theheight / 100);
-    //this probably fixed the issue
     theweight = theweight;
     num heightinMetersSquare = heightInMeters * heightInMeters;
-    num bmi = (theweight / heightinMetersSquare);
+    double bmi = (theweight / heightinMetersSquare);
     int userstatecase = 0;
     String userstate = "unknown";
+    var colorForCatagotyRepresentaion;
+    var colorForCatagotyRepresentaionCard;
     void updateevethying() {
       setState(() {
-        bmi;
+        bmi = double.parse((bmi).toStringAsFixed(2));
       });
     }
 
@@ -79,34 +80,63 @@ class _MyHomePageState extends State<MyHomePage> {
     if (40 < bmi) {
       userstatecase = 8;
     }
+    if (50 < bmi) {
+      userstatecase = 9;
+    }
 
     switch (userstatecase) {
       case 0:
         userstate = "unknown";
+        colorForCatagotyRepresentaion = Colors.white;
+        colorForCatagotyRepresentaionCard = Colors.redAccent;
+
         break;
       case 1:
         userstate = "Severe Thinness";
+        colorForCatagotyRepresentaion = Colors.white;
+        colorForCatagotyRepresentaionCard = Colors.redAccent;
+
         break;
       case 2:
         userstate = "Moderate Thinness";
+        colorForCatagotyRepresentaion = Colors.black;
+        colorForCatagotyRepresentaionCard = Colors.amber;
+
         break;
       case 3:
         userstate = "Mild Thinness";
+        colorForCatagotyRepresentaion = Colors.black;
+        colorForCatagotyRepresentaionCard = Colors.amber;
         break;
       case 4:
         userstate = "Normal";
+        colorForCatagotyRepresentaion = Colors.black;
+        colorForCatagotyRepresentaionCard = Colors.greenAccent;
         break;
       case 5:
         userstate = "Overweight";
+        colorForCatagotyRepresentaion = Colors.black;
+        colorForCatagotyRepresentaionCard = Colors.amber;
         break;
       case 6:
         userstate = "Obese Class I";
+        colorForCatagotyRepresentaion = Colors.white;
+        colorForCatagotyRepresentaionCard = Colors.redAccent;
         break;
       case 7:
         userstate = "Obese Class II";
+        colorForCatagotyRepresentaion = Colors.white;
+        colorForCatagotyRepresentaionCard = Colors.redAccent;
         break;
       case 8:
         userstate = "Obese Class III";
+        colorForCatagotyRepresentaion = Colors.white;
+        colorForCatagotyRepresentaionCard = Colors.redAccent;
+        break;
+      case 9:
+        userstate = "Wait seriously?!";
+        colorForCatagotyRepresentaionCard = Colors.deepPurple;
+        colorForCatagotyRepresentaion = Colors.amberAccent;
         break;
       default:
         userstate = "unknown";
@@ -187,7 +217,25 @@ class _MyHomePageState extends State<MyHomePage> {
                 "$bmi",
                 style: Theme.of(context).textTheme.headlineLarge,
               ),
-              Text("You belong to the $userstate catagory")
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Padding(
+                    padding: EdgeInsets.all(0.0),
+                    child: Text("You belong to the"),
+                  ),
+                  Card(
+                    color: colorForCatagotyRepresentaionCard,
+                    child: Padding(
+                      padding: const EdgeInsets.all(5.0),
+                      child: Text(
+                        " $userstate catagory",
+                        style: TextStyle(color: colorForCatagotyRepresentaion),
+                      ),
+                    ),
+                  ),
+                ],
+              )
             ],
           ),
         ),
