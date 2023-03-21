@@ -43,11 +43,13 @@ class _MyHomePageState extends State<MyHomePage> {
     num theweight = int.tryParse(myweightController.text) ?? 0;
     num theheight = int.tryParse(myheightController.text) ?? 0;
     num heightInMeters = (theheight / 100);
-    theweight = theweight;
+    num theweightvalue = theweight;
     num heightinMetersSquare = heightInMeters * heightInMeters;
-    double bmi = (theweight / heightinMetersSquare);
+    double bmi = (theweightvalue / heightinMetersSquare);
     int userstatecase = 0;
     String userstate = "unknown";
+    bool gender = true;
+    //String units;
     var colorForCatagotyRepresentaion;
     var colorForCatagotyRepresentaionCard;
     void updateevethying() {
@@ -135,8 +137,8 @@ class _MyHomePageState extends State<MyHomePage> {
         break;
       case 9:
         userstate = "Wait seriously?!";
-        colorForCatagotyRepresentaionCard = Colors.deepPurple;
-        colorForCatagotyRepresentaion = Colors.amberAccent;
+        colorForCatagotyRepresentaionCard = Colors.white;
+        colorForCatagotyRepresentaion = Colors.redAccent;
         break;
       default:
         userstate = "unknown";
