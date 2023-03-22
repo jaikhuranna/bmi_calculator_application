@@ -37,7 +37,7 @@ class _MyHomePageState extends State<MyHomePage> {
   final myweightController = TextEditingController();
   final myheightController = TextEditingController();
 
-  double bmi = 0.0;
+  int bmi = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -50,6 +50,8 @@ class _MyHomePageState extends State<MyHomePage> {
     int userstatecase = 0;
     String userstate = "unknown";
     bool gender = true;
+    int selectedIndex = 0;
+    int counter = 11;
     String unitdescriptor;
     var colorOfUnits;
     var colorForCatagotyRepresentaion;
@@ -59,9 +61,6 @@ class _MyHomePageState extends State<MyHomePage> {
         bmi = double.parse((bmi).toStringAsPrecision(2));
       });
     }
-
-    int selectedIndex = 0;
-    int counter = 11;
 
     void incrementCounter() {
       setState(() {
@@ -265,13 +264,15 @@ class _MyHomePageState extends State<MyHomePage> {
                     child: Padding(
                       padding: const EdgeInsets.all(5.0),
                       child: Text(
-                        " $userstate catagory + $counter",
+                        "$userstate catagory",
                         style: TextStyle(color: colorForCatagotyRepresentaion),
                       ),
                     ),
                   ),
                 ],
               ),
+              ElevatedButton(
+                  onPressed: incrementCounter, child: Text("$counter")),
             ],
           ),
         ),
