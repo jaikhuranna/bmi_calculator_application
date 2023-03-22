@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       theme: ThemeData(
         useMaterial3: true,
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.lightGreen),
       ),
       home: const MyHomePage(title: 'BMI Calculator'),
     );
@@ -49,16 +49,18 @@ class _MyHomePageState extends State<MyHomePage> {
     double bmi = (theweightvalue / heightinMetersSquare);
     int userstatecase = 0;
     String userstate = "unknown";
-    bool gender = true;
     int selectedIndex = 0;
     int counter = 11;
+    String nullthecatagory = "Catagory";
     String unitdescriptor;
+    String valueforeffectofinitialisation = "You belong to the ";
     var colorOfUnits;
     var colorForCatagotyRepresentaion;
     var colorForCatagotyRepresentaionCard;
     void updateevethying() {
       setState(() {
         bmi = double.parse((bmi).toStringAsPrecision(2));
+        bmi;
       });
     }
 
@@ -119,10 +121,11 @@ class _MyHomePageState extends State<MyHomePage> {
 
     switch (userstatecase) {
       case 0:
-        userstate = "unknown";
+        userstate = "Press this to calculate BMI";
         colorForCatagotyRepresentaion = Colors.white;
         colorForCatagotyRepresentaionCard = Colors.black;
-
+        valueforeffectofinitialisation = "Enter the values and ";
+        nullthecatagory = "";
         break;
       case 1:
         userstate = "Severe Thinness";
@@ -185,9 +188,9 @@ class _MyHomePageState extends State<MyHomePage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Padding(
-                    padding: const EdgeInsets.only(left: 20, right: 5),
+                    padding: const EdgeInsets.only(left: 20, right: 1),
                     child: Card(
-                      color: Colors.limeAccent,
+                      color: Colors.lightGreenAccent,
                       child: Padding(
                         padding: const EdgeInsets.all(10.0),
                         child: TextField(
@@ -206,16 +209,19 @@ class _MyHomePageState extends State<MyHomePage> {
                     width: 10,
                   ),
                   const Padding(
-                    padding: EdgeInsets.all(8.0),
-                    child: Text("/"),
+                    padding: EdgeInsets.all(2.0),
+                    child: Text(
+                      "&",
+                      textScaleFactor: 4,
+                    ),
                   ),
                   const SizedBox(
                     width: 10,
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(left: 5, right: 20),
+                    padding: const EdgeInsets.only(left: 1, right: 20),
                     child: Card(
-                      color: Colors.limeAccent,
+                      color: Colors.lightGreenAccent,
                       child: Padding(
                         padding: const EdgeInsets.all(10.0),
                         child: TextField(
@@ -233,7 +239,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 ],
               ),
               const SizedBox(
-                height: 10,
+                height: 15,
               ),
               Padding(
                 padding: const EdgeInsets.all(0),
@@ -246,40 +252,54 @@ class _MyHomePageState extends State<MyHomePage> {
                 'Your BMI:',
               ),
               const SizedBox(
-                height: 7,
+                height: 15,
               ),
-              Text(
-                "$bmi",
-                style: Theme.of(context).textTheme.headlineLarge,
+              Card(
+                color: Colors.lightGreenAccent,
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(
+                    "$bmi",
+                    style: Theme.of(context).textTheme.headlineLarge,
+                  ),
+                ),
+              ),
+              const SizedBox(
+                height: 15,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Padding(
-                    padding: EdgeInsets.all(0.0),
-                    child: Text("You belong to the"),
+                  Padding(
+                    padding: const EdgeInsets.all(0.0),
+                    child: Text(valueforeffectofinitialisation),
                   ),
-                  Card(
-                    color: colorForCatagotyRepresentaionCard,
+                  ElevatedButton(
+                    onPressed: updateevethying,
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: colorForCatagotyRepresentaionCard,
+                    ),
                     child: Padding(
                       padding: const EdgeInsets.all(5.0),
                       child: Text(
-                        "$userstate catagory",
+                        "$userstate $nullthecatagory",
                         style: TextStyle(color: colorForCatagotyRepresentaion),
                       ),
                     ),
                   ),
                 ],
               ),
-              ElevatedButton(
-                  onPressed: incrementCounter, child: Text("$counter")),
+              //ElevatedButton(
+              //    onPressed: incrementCounter, child: Text("$counter")),
             ],
           ),
         ),
         floatingActionButton: FloatingActionButton(
-          onPressed: updateevethying,
+          onPressed: incrementCounter,
           tooltip: 'Unit change',
-          child: const Icon(Icons.calculate_rounded),
+          backgroundColor: colorOfUnits,
+          foregroundColor: Colors.white,
+          child: const Icon(Icons.switch_access_shortcut),
           // This trailing comma makes auto-formatting nicer for build methods.
         ));
   }
