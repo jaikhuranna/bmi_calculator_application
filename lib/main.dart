@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:ffi';
 import 'dart:io';
 import 'dart:math';
@@ -49,33 +50,44 @@ class _MyHomePageState extends State<MyHomePage> {
     int userstatecase = 0;
     String userstate = "unknown";
     bool gender = true;
-    //String units;
+    String unitdescriptor;
+    var colorOfUnits;
     var colorForCatagotyRepresentaion;
     var colorForCatagotyRepresentaionCard;
     void updateevethying() {
       setState(() {
-        bmi = double.parse((bmi).toStringAsFixed(2));
+        bmi = double.parse((bmi).toStringAsPrecision(2));
       });
     }
 
     int selectedIndex = 0;
-    const TextStyle optionStyle =
-        TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
-    const List<Widget> widgetOptions = <Widget>[
-      Text(
-        'Index 0: Metric',
-        style: optionStyle,
-      ),
-      Text(
-        'Index 1: US units',
-        style: optionStyle,
-      ),
-    ];
+    int counter = 11;
 
-    void onItemTapped(int index) {
+    void incrementCounter() {
       setState(() {
-        selectedIndex = index;
+        counter++;
       });
+    }
+
+    if (counter % 2 == 0) {
+      selectedIndex = 0;
+    } else {
+      selectedIndex = 1;
+    }
+
+    switch (selectedIndex) {
+      case 0:
+        unitdescriptor = "US system";
+        colorOfUnits = Colors.red;
+        break;
+      case 1:
+        unitdescriptor = "Metric system";
+        colorOfUnits = Colors.green;
+        break;
+      default:
+        unitdescriptor = "US system";
+        colorOfUnits = Colors.red;
+        break;
     }
 
     if (bmi < 16) {
@@ -110,7 +122,7 @@ class _MyHomePageState extends State<MyHomePage> {
       case 0:
         userstate = "unknown";
         colorForCatagotyRepresentaion = Colors.white;
-        colorForCatagotyRepresentaionCard = Colors.redAccent;
+        colorForCatagotyRepresentaionCard = Colors.black;
 
         break;
       case 1:
@@ -156,132 +168,118 @@ class _MyHomePageState extends State<MyHomePage> {
         colorForCatagotyRepresentaionCard = Colors.redAccent;
         break;
       case 9:
-        userstate = "Wait seriously?!";
+        userstate = "Hmm";
         colorForCatagotyRepresentaionCard = Colors.white;
         colorForCatagotyRepresentaion = Colors.redAccent;
-        break;
-      default:
-        userstate = "unknown";
         break;
     }
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(left: 20, right: 5),
-                  child: Card(
-                    color: Colors.limeAccent,
-                    child: Padding(
-                      padding: const EdgeInsets.all(10.0),
-                      child: TextField(
-                          controller: myweightController,
-                          keyboardType: TextInputType.number,
-                          inputFormatters: <TextInputFormatter>[
-                            FilteringTextInputFormatter.digitsOnly,
-                          ],
-                          decoration: const InputDecoration(
-                              labelText: "Weight",
-                              constraints: BoxConstraints(maxWidth: 100))),
-                    ),
-                  ),
-                ),
-                const SizedBox(
-                  width: 10,
-                ),
-                const Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: Text("/"),
-                ),
-                const SizedBox(
-                  width: 10,
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 5, right: 20),
-                  child: Card(
-                    color: Colors.limeAccent,
-                    child: Padding(
-                      padding: const EdgeInsets.all(10.0),
-                      child: TextField(
-                          controller: myheightController,
-                          keyboardType: TextInputType.number,
-                          inputFormatters: <TextInputFormatter>[
-                            FilteringTextInputFormatter.digitsOnly,
-                          ],
-                          decoration: const InputDecoration(
-                              labelText: "Height",
-                              constraints: BoxConstraints(maxWidth: 100))),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            const Text(
-              'Your BMI:',
-            ),
-            const Text("Weight(Kgs) and Height^2(cm)"),
-            const SizedBox(
-              height: 7,
-            ),
-            Text(
-              "$bmi",
-              style: Theme.of(context).textTheme.headlineLarge,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const Padding(
-                  padding: EdgeInsets.all(0.0),
-                  child: Text("You belong to the"),
-                ),
-                Card(
-                  color: colorForCatagotyRepresentaionCard,
-                  child: Padding(
-                    padding: const EdgeInsets.all(5.0),
-                    child: Text(
-                      " $userstate catagory",
-                      style: TextStyle(color: colorForCatagotyRepresentaion),
-                    ),
-                  ),
-                ),
-              ],
-            )
-          ],
+        appBar: AppBar(
+          title: Text(widget.title),
         ),
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.check_circle),
-            label: 'Metric',
+        body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(left: 20, right: 5),
+                    child: Card(
+                      color: Colors.limeAccent,
+                      child: Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: TextField(
+                            controller: myweightController,
+                            keyboardType: TextInputType.number,
+                            inputFormatters: <TextInputFormatter>[
+                              FilteringTextInputFormatter.digitsOnly,
+                            ],
+                            decoration: const InputDecoration(
+                                labelText: "Weight",
+                                constraints: BoxConstraints(maxWidth: 100))),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(
+                    width: 10,
+                  ),
+                  const Padding(
+                    padding: EdgeInsets.all(8.0),
+                    child: Text("/"),
+                  ),
+                  const SizedBox(
+                    width: 10,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 5, right: 20),
+                    child: Card(
+                      color: Colors.limeAccent,
+                      child: Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: TextField(
+                            controller: myheightController,
+                            keyboardType: TextInputType.number,
+                            inputFormatters: <TextInputFormatter>[
+                              FilteringTextInputFormatter.digitsOnly,
+                            ],
+                            decoration: const InputDecoration(
+                                labelText: "Height",
+                                constraints: BoxConstraints(maxWidth: 100))),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              Padding(
+                padding: const EdgeInsets.all(0),
+                child: Text(
+                  unitdescriptor,
+                  style: TextStyle(color: colorOfUnits),
+                ),
+              ),
+              const Text(
+                'Your BMI:',
+              ),
+              const SizedBox(
+                height: 7,
+              ),
+              Text(
+                "$bmi",
+                style: Theme.of(context).textTheme.headlineLarge,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Padding(
+                    padding: EdgeInsets.all(0.0),
+                    child: Text("You belong to the"),
+                  ),
+                  Card(
+                    color: colorForCatagotyRepresentaionCard,
+                    child: Padding(
+                      padding: const EdgeInsets.all(5.0),
+                      child: Text(
+                        " $userstate catagory + $counter",
+                        style: TextStyle(color: colorForCatagotyRepresentaion),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ],
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.incomplete_circle_rounded),
-            label: 'US units',
-          ),
-        ],
-        currentIndex: selectedIndex,
-        selectedItemColor: Colors.blueAccent[800],
-        onTap: onItemTapped,
-      ),
-      floatingActionButton: FloatingActionButton(
-        tooltip: 'Update BMI',
-        onPressed: () {
-          updateevethying();
-        },
-        child: const Icon(Icons.calculate_rounded),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
-    );
+        ),
+        floatingActionButton: FloatingActionButton(
+          onPressed: updateevethying,
+          tooltip: 'Unit change',
+          child: const Icon(Icons.calculate_rounded),
+          // This trailing comma makes auto-formatting nicer for build methods.
+        ));
   }
 }
