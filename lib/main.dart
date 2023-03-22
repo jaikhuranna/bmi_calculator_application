@@ -56,7 +56,8 @@ class _MyHomePageState extends State<MyHomePage> {
     String stringbmi = bmi.toString();
     bmi = double.parse((bmi).toStringAsFixed(2));
     stringbmi = stringbmi.toString();
-    stringbmi = stringbmi.substring(0, 5);
+    stringbmi = stringbmi;
+      //substring(0, 5); plannd to add this but dosent work for some reason right now, will fix this is the next few commits
 
     String valueforeffectofinitialisation = "You belong to the ";
     var colorOfUnits;
