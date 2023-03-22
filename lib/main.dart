@@ -150,96 +150,94 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text(widget.title),
       ),
       body: Center(
-        child: Card(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(left: 20, right: 5),
-                    child: Card(
-                      color: Colors.limeAccent,
-                      child: Padding(
-                        padding: const EdgeInsets.all(10.0),
-                        child: TextField(
-                            controller: myweightController,
-                            keyboardType: TextInputType.number,
-                            inputFormatters: <TextInputFormatter>[
-                              FilteringTextInputFormatter.digitsOnly,
-                            ],
-                            decoration: const InputDecoration(
-                                labelText: "Weight",
-                                constraints: BoxConstraints(maxWidth: 100))),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(
-                    width: 10,
-                  ),
-                  const Padding(
-                    padding: EdgeInsets.all(8.0),
-                    child: Text("/"),
-                  ),
-                  const SizedBox(
-                    width: 10,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 5, right: 20),
-                    child: Card(
-                      color: Colors.limeAccent,
-                      child: Padding(
-                        padding: const EdgeInsets.all(10.0),
-                        child: TextField(
-                            controller: myheightController,
-                            keyboardType: TextInputType.number,
-                            inputFormatters: <TextInputFormatter>[
-                              FilteringTextInputFormatter.digitsOnly,
-                            ],
-                            decoration: const InputDecoration(
-                                labelText: "Height",
-                                constraints: BoxConstraints(maxWidth: 100))),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              const Text(
-                'Your BMI:',
-              ),
-              const Text("Weight(Kgs) and Height^2(cm)"),
-              const SizedBox(
-                height: 7,
-              ),
-              Text(
-                "$bmi",
-                style: Theme.of(context).textTheme.headlineLarge,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Padding(
-                    padding: EdgeInsets.all(0.0),
-                    child: Text("You belong to the"),
-                  ),
-                  Card(
-                    color: colorForCatagotyRepresentaionCard,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(left: 20, right: 5),
+                  child: Card(
+                    color: Colors.limeAccent,
                     child: Padding(
-                      padding: const EdgeInsets.all(5.0),
-                      child: Text(
-                        " $userstate catagory",
-                        style: TextStyle(color: colorForCatagotyRepresentaion),
-                      ),
+                      padding: const EdgeInsets.all(10.0),
+                      child: TextField(
+                          controller: myweightController,
+                          keyboardType: TextInputType.number,
+                          inputFormatters: <TextInputFormatter>[
+                            FilteringTextInputFormatter.digitsOnly,
+                          ],
+                          decoration: const InputDecoration(
+                              labelText: "Weight",
+                              constraints: BoxConstraints(maxWidth: 100))),
                     ),
                   ),
-                ],
-              )
-            ],
-          ),
+                ),
+                const SizedBox(
+                  width: 10,
+                ),
+                const Padding(
+                  padding: EdgeInsets.all(8.0),
+                  child: Text("/"),
+                ),
+                const SizedBox(
+                  width: 10,
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(left: 5, right: 20),
+                  child: Card(
+                    color: Colors.limeAccent,
+                    child: Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: TextField(
+                          controller: myheightController,
+                          keyboardType: TextInputType.number,
+                          inputFormatters: <TextInputFormatter>[
+                            FilteringTextInputFormatter.digitsOnly,
+                          ],
+                          decoration: const InputDecoration(
+                              labelText: "Height",
+                              constraints: BoxConstraints(maxWidth: 100))),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            const Text(
+              'Your BMI:',
+            ),
+            const Text("Weight(Kgs) and Height^2(cm)"),
+            const SizedBox(
+              height: 7,
+            ),
+            Text(
+              "$bmi",
+              style: Theme.of(context).textTheme.headlineLarge,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Padding(
+                  padding: EdgeInsets.all(0.0),
+                  child: Text("You belong to the"),
+                ),
+                Card(
+                  color: colorForCatagotyRepresentaionCard,
+                  child: Padding(
+                    padding: const EdgeInsets.all(5.0),
+                    child: Text(
+                      " $userstate catagory",
+                      style: TextStyle(color: colorForCatagotyRepresentaion),
+                    ),
+                  ),
+                ),
+              ],
+            )
+          ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
