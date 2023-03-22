@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'BMI Calculator',
       theme: ThemeData(
         useMaterial3: true,
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.lightGreen),
@@ -53,22 +53,24 @@ class _MyHomePageState extends State<MyHomePage> {
     int counter = 11;
     String nullthecatagory = "Catagory";
     String unitdescriptor;
+    String stringbmi = bmi.toString().substring(0, 5);
     String valueforeffectofinitialisation = "You belong to the ";
     var colorOfUnits;
     var colorForCatagotyRepresentaion;
     var colorForCatagotyRepresentaionCard;
+
     void updateevethying() {
       setState(() {
-        bmi = double.parse((bmi).toStringAsPrecision(2));
-        bmi;
+        bmi = double.parse((bmi).toStringAsFixed(2));
+        stringbmi;
       });
     }
 
-    void incrementCounter() {
-      setState(() {
-        counter++;
-      });
-    }
+    //void incrementCounter() {
+    //  setState(() {
+    //    counter++;
+    //  });
+    //}
 
     if (counter % 2 == 0) {
       selectedIndex = 0;
@@ -83,7 +85,7 @@ class _MyHomePageState extends State<MyHomePage> {
         break;
       case 1:
         unitdescriptor = "Metric system";
-        colorOfUnits = Colors.green;
+        colorOfUnits = Colors.lightGreen;
         break;
       default:
         unitdescriptor = "US system";
@@ -173,134 +175,135 @@ class _MyHomePageState extends State<MyHomePage> {
         userstate = "Hmm";
         colorForCatagotyRepresentaionCard = Colors.white;
         colorForCatagotyRepresentaion = Colors.redAccent;
+        nullthecatagory = "";
         break;
     }
 
     return Scaffold(
-        appBar: AppBar(
-          title: Text(widget.title),
-        ),
-        body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(left: 20, right: 1),
-                    child: Card(
-                      color: Colors.lightGreenAccent,
-                      child: Padding(
-                        padding: const EdgeInsets.all(10.0),
-                        child: TextField(
-                            controller: myweightController,
-                            keyboardType: TextInputType.number,
-                            inputFormatters: <TextInputFormatter>[
-                              FilteringTextInputFormatter.digitsOnly,
-                            ],
-                            decoration: const InputDecoration(
-                                labelText: "Weight",
-                                constraints: BoxConstraints(maxWidth: 100))),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(
-                    width: 10,
-                  ),
-                  const Padding(
-                    padding: EdgeInsets.all(2.0),
-                    child: Text(
-                      "&",
-                      textScaleFactor: 4,
-                    ),
-                  ),
-                  const SizedBox(
-                    width: 10,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 1, right: 20),
-                    child: Card(
-                      color: Colors.lightGreenAccent,
-                      child: Padding(
-                        padding: const EdgeInsets.all(10.0),
-                        child: TextField(
-                            controller: myheightController,
-                            keyboardType: TextInputType.number,
-                            inputFormatters: <TextInputFormatter>[
-                              FilteringTextInputFormatter.digitsOnly,
-                            ],
-                            decoration: const InputDecoration(
-                                labelText: "Height",
-                                constraints: BoxConstraints(maxWidth: 100))),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              const SizedBox(
-                height: 15,
-              ),
-              Padding(
-                padding: const EdgeInsets.all(0),
-                child: Text(
-                  unitdescriptor,
-                  style: TextStyle(color: colorOfUnits),
-                ),
-              ),
-              const Text(
-                'Your BMI:',
-              ),
-              const SizedBox(
-                height: 15,
-              ),
-              Card(
-                color: Colors.lightGreenAccent,
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text(
-                    "$bmi",
-                    style: Theme.of(context).textTheme.headlineLarge,
-                  ),
-                ),
-              ),
-              const SizedBox(
-                height: 15,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(0.0),
-                    child: Text(valueforeffectofinitialisation),
-                  ),
-                  ElevatedButton(
-                    onPressed: updateevethying,
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: colorForCatagotyRepresentaionCard,
-                    ),
+      appBar: AppBar(
+        title: Text(widget.title),
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(left: 20, right: 1),
+                  child: Card(
+                    color: Colors.lightGreenAccent,
                     child: Padding(
-                      padding: const EdgeInsets.all(5.0),
-                      child: Text(
-                        "$userstate $nullthecatagory",
-                        style: TextStyle(color: colorForCatagotyRepresentaion),
-                      ),
+                      padding: const EdgeInsets.all(10.0),
+                      child: TextField(
+                          controller: myweightController,
+                          keyboardType: TextInputType.number,
+                          inputFormatters: <TextInputFormatter>[
+                            FilteringTextInputFormatter.digitsOnly,
+                          ],
+                          decoration: const InputDecoration(
+                              labelText: "Weight",
+                              constraints: BoxConstraints(maxWidth: 100))),
                     ),
                   ),
-                ],
+                ),
+                const SizedBox(
+                  width: 10,
+                ),
+                const Padding(
+                  padding: EdgeInsets.all(2.0),
+                  child: Text(
+                    "&",
+                    textScaleFactor: 4,
+                  ),
+                ),
+                const SizedBox(
+                  width: 10,
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(left: 1, right: 20),
+                  child: Card(
+                    color: Colors.lightGreenAccent,
+                    child: Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: TextField(
+                          controller: myheightController,
+                          keyboardType: TextInputType.number,
+                          inputFormatters: <TextInputFormatter>[
+                            FilteringTextInputFormatter.digitsOnly,
+                          ],
+                          decoration: const InputDecoration(
+                              labelText: "Height",
+                              constraints: BoxConstraints(maxWidth: 100))),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(
+              height: 15,
+            ),
+            Padding(
+              padding: const EdgeInsets.all(0),
+              child: Text(
+                unitdescriptor,
+                style: TextStyle(color: colorOfUnits),
               ),
-              //ElevatedButton(
-              //    onPressed: incrementCounter, child: Text("$counter")),
-            ],
-          ),
+            ),
+            const Text(
+              'Your BMI:',
+            ),
+            const SizedBox(
+              height: 15,
+            ),
+            Card(
+              color: Colors.lightGreenAccent,
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(
+                  stringbmi,
+                  style: Theme.of(context).textTheme.headlineLarge,
+                ),
+              ),
+            ),
+            const SizedBox(
+              height: 19,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(0.0),
+                  child: Text(valueforeffectofinitialisation),
+                ),
+                ElevatedButton(
+                  onPressed: updateevethying,
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: colorForCatagotyRepresentaionCard,
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(5.0),
+                    child: Text(
+                      "$userstate $nullthecatagory",
+                      style: TextStyle(color: colorForCatagotyRepresentaion),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            //ElevatedButton(
+            //    onPressed: incrementCounter, child: Text("$counter")),
+          ],
         ),
-        floatingActionButton: FloatingActionButton(
-          onPressed: incrementCounter,
-          tooltip: 'Unit change',
-          backgroundColor: colorOfUnits,
-          foregroundColor: Colors.white,
-          child: const Icon(Icons.switch_access_shortcut),
-          // This trailing comma makes auto-formatting nicer for build methods.
-        ));
+      ),
+      //floatingActionButton: FloatingActionButton(
+      //  onPressed: incrementCounter,
+      //  tooltip: 'Unit change',
+      //  backgroundColor: colorOfUnits,
+      //  foregroundColor: Colors.black,
+      //  child: const Icon(Icons.switch_access_shortcut),
+      //)
+    );
   }
 }
