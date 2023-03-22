@@ -53,7 +53,8 @@ class _MyHomePageState extends State<MyHomePage> {
     int counter = 11;
     String nullthecatagory = "Catagory";
     String unitdescriptor;
-    String stringbmi = bmi.toString().substring(0, 5);
+    String stringbmi = bmi.toString();
+
     String valueforeffectofinitialisation = "You belong to the ";
     var colorOfUnits;
     var colorForCatagotyRepresentaion;
@@ -62,7 +63,7 @@ class _MyHomePageState extends State<MyHomePage> {
     void updateevethying() {
       setState(() {
         bmi = double.parse((bmi).toStringAsFixed(2));
-        stringbmi;
+        stringbmi.substring(0, 5);
       });
     }
 
