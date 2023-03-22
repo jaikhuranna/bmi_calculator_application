@@ -1,3 +1,3 @@
 # bmi_calculator_application
 
-![image](https://user-images.githubusercontent.com/64320051/226983739-0c5e3d77-ee0c-4025-a83f-63a1cca4e471.png)
+![image](https://user-images.githubusercontent.com/64320051/226984888-97adc4be-84d9-464c-b671-a0e90e7879ec.png)
