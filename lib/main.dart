@@ -58,6 +58,26 @@ class _MyHomePageState extends State<MyHomePage> {
       });
     }
 
+    int selectedIndex = 0;
+    const TextStyle optionStyle =
+        TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
+    const List<Widget> widgetOptions = <Widget>[
+      Text(
+        'Index 0: Metric',
+        style: optionStyle,
+      ),
+      Text(
+        'Index 1: US units',
+        style: optionStyle,
+      ),
+    ];
+
+    void onItemTapped(int index) {
+      setState(() {
+        selectedIndex = index;
+      });
+    }
+
     if (bmi < 16) {
       userstatecase = 1;
     }
@@ -239,6 +259,21 @@ class _MyHomePageState extends State<MyHomePage> {
             )
           ],
         ),
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.check_circle),
+            label: 'Metric',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.incomplete_circle_rounded),
+            label: 'US units',
+          ),
+        ],
+        currentIndex: selectedIndex,
+        selectedItemColor: Colors.blueAccent[800],
+        onTap: onItemTapped,
       ),
       floatingActionButton: FloatingActionButton(
         tooltip: 'Update BMI',
